@@ -3,14 +3,13 @@ import axios from 'axios'
 
 import './Categories.css'
 import Category from '../../types/category.types'
-import env from '../../config/env.config'
 
 const Categories = ()=>{
   const [categories,setCategories] = useState<Category[]>([])
 
   const fetchCategories = async () => {
     try {
-      const {data} = await axios.get(`${env.apiUrl}/api/category`)
+      const {data} = await axios.get(`https://club-ecommerce-api.up.railway.app/api/category`)
       console.log(data)
       setCategories(data) 
       
@@ -18,7 +17,6 @@ const Categories = ()=>{
       console.log({error})
     }
   }
-
   console.log(categories)
 
   useEffect(()=>{
