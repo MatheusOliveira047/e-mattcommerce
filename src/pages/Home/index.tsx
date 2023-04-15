@@ -3,11 +3,11 @@ import Categories from '../../components/categories'
 
 const Home = ()=>{
   return (
-    <div>
+    <>
       <Header/>
       
       <Categories/>
-    </div>
+    </>
   )
 }
 
