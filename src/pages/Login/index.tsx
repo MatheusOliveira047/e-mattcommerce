@@ -10,6 +10,7 @@ import {
   LoginInputContainer,
   LoginSubtitle
 } from './login.styled'
+import CustomInput from '../../components/Custom-Input'
 
 
 
@@ -21,8 +22,12 @@ const LoginPage = ()=>{
         <LoginHeadline> Entre com a sua conta </LoginHeadline>
         <CustomButton startIcon={<BsGoogle size={18}/>}> Entrar com o Google </CustomButton>
         <LoginSubtitle> ou entre com o seu e-mail</LoginSubtitle>
-        <LoginInputContainer>{/** email input*/}</LoginInputContainer>
-        <LoginInputContainer>{/** email input*/}</LoginInputContainer>
+        <LoginInputContainer>
+          <CustomInput placeholder='Digite seu e-mail' type='email'/>
+        </LoginInputContainer>
+        <LoginInputContainer>          
+          <CustomInput placeholder='Digite sua senha' type='password'/>
+        </LoginInputContainer>
         <CustomButton startIcon={<FiLogIn size={18}/>}>Entrar</CustomButton>
       </LoginContent>
     </LoginContainer>
