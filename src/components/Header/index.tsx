@@ -1,17 +1,27 @@
 import {BsCart3} from 'react-icons/bs'
 import {Header_Container,HeaderItem,HeaderItems,HeaderTitle} from './header.styles'
 
+import { useNavigate } from 'react-router-dom'
+
 
 const Header = ()=>{
+  const navigate = useNavigate()
+
+  const handleLoginClick = (page:string)=>{
+    navigate(page)
+  }
+
+
   return (
     <Header_Container>
-      <HeaderTitle>E-MattClothing</HeaderTitle>
+      <HeaderTitle onClick={()=>handleLoginClick('/')}>E-MattClothing</HeaderTitle>
 
       <HeaderItems>
         <HeaderItem>
-          Explorar</HeaderItem>
-        <HeaderItem>
-          Login
+          Explorar
+        </HeaderItem>
+        <HeaderItem onClick={()=>handleLoginClick('/login')}>
+         Login
         </HeaderItem>
         <HeaderItem>
           Criar Conta

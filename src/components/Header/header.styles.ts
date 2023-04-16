@@ -14,6 +14,9 @@ export const Header_Container = styled.header`
 export const HeaderTitle= styled.h2`
   font-weight: bold;
   font-size: 1.5rem;
+  &:hover{
+    cursor: pointer;
+  }
 `
 
 export const HeaderItems = styled.div`
@@ -27,6 +30,9 @@ export const HeaderItem = styled.div`
   font-size: 1rem;
   display: flex;
   align-items: center;
+  &:hover{
+    cursor: pointer;
+  }
   :nth-child(1),
   :nth-child(2),
   :nth-child(3) {
