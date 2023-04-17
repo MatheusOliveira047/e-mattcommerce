@@ -15,10 +15,13 @@ import {
 import CustomInput from '../../components/Custom-Input'
 import InputErrorMessage from '../../components/input-error-message'
 
-
+interface LoginForm {
+  email:string
+  password:string
+}
 
 const LoginPage = ()=>{
-  const {register, formState: {errors}, handleSubmit} = useForm()
+  const {register, formState: {errors}, handleSubmit} = useForm<LoginForm>()
 
   const handleSubmitPress = (data:any)=>{
     console.log({data})
