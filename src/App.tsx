@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import LoginPage from './pages/Login';
 import Header from './components/Header';
 import './App.css'
+import SingUpPage from './pages/Sing-up';
 
 
 const App  = ()=>{
@@ -12,6 +13,8 @@ const App  = ()=>{
       <Routes>
         <Route path='/' element={<Home/>} />
         <Route path='/login' element={<LoginPage/>} />
+        <Route path='/singup' element={<SingUpPage/>} />
+
 
       </Routes>
     </BrowserRouter>

@@ -23,7 +23,7 @@ const Header = ()=>{
         <HeaderItem onClick={()=>handleLoginClick('/login')}>
          Login
         </HeaderItem>
-        <HeaderItem>
+        <HeaderItem onClick={()=>handleLoginClick('/singup')}>
           Criar Conta
         </HeaderItem>
         <HeaderItem>
