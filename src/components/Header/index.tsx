@@ -28,7 +28,7 @@ const Header = ()=>{
         </HeaderItem>
         <HeaderItem>
           <BsCart3 size={25}/>
-          <p style={{marginLeft:5}}>5</p>
+          <p>5</p>
         </HeaderItem>
       </HeaderItems>
     </Header_Container>

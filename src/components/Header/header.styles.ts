@@ -30,6 +30,9 @@ export const HeaderItem = styled.div`
   font-size: 1rem;
   display: flex;
   align-items: center;
+  p{
+    margin-left: 5px;
+  }
   &:hover{
     cursor: pointer;
   }
