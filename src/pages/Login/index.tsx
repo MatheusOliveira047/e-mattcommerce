@@ -14,6 +14,8 @@ import {
 } from './login.styled'
 import CustomInput from '../../components/Custom-Input'
 import InputErrorMessage from '../../components/input-error-message'
+import { AuthError, AuthErrorCodes, signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../config/firebase.config'
 
 interface LoginForm {
   email:string
@@ -21,10 +23,23 @@ interface LoginForm {
 }
 
 const LoginPage = ()=>{
-  const {register, formState: {errors}, handleSubmit} = useForm<LoginForm>()
+  const {register, formState: {errors}, handleSubmit, setError} = useForm<LoginForm>()
 
-  const handleSubmitPress = (data:any)=>{
-    console.log({data})
+  const handleSubmitPress = async(data:LoginForm)=>{
+    try {
+     const userCredential =  await signInWithEmailAndPassword(auth,data.email,data.password)
+
+     console.log(userCredential)
+    } catch (error) {
+      const _error = error as AuthError
+      console.log(error)
+      if(_error.code === AuthErrorCodes.INVALID_PASSWORD){
+        return setError('password', {type:'mismatch'})
+      }
+      if(_error.code === AuthErrorCodes.USER_DELETED){
+        return setError('email', {type:'not-user'})
+      }
+    }
   }
 
 
@@ -50,6 +65,9 @@ const LoginPage = ()=>{
             {errors?.email?.type === 'validate' && (
               <InputErrorMessage>Por favor, insira um e-mail válido</InputErrorMessage>
             )}
+            {errors?.email?.type === 'not-user' && (
+              <InputErrorMessage>Usuário não existe</InputErrorMessage>
+            )}
         </LoginInputContainer>
 
         <LoginInputContainer>
@@ -64,6 +82,9 @@ const LoginPage = ()=>{
             )}
             {errors?.password?.type === 'minLength' && (
               <InputErrorMessage>A senha precisa ter pelo menos 6 caracteres.</InputErrorMessage>
+            )}
+            {errors?.password?.type === 'mismatch' && (
+              <InputErrorMessage>Senha incorreta</InputErrorMessage>
             )}
         </LoginInputContainer>
 
