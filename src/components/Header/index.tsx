@@ -4,10 +4,14 @@ import {Header_Container,HeaderItem,HeaderItems,HeaderTitle} from './header.styl
 import { useNavigate } from 'react-router-dom'
 import { signOut } from 'firebase/auth'
 import { auth } from '../../config/firebase.config'
+import { useContext } from 'react'
+import { UserContext } from '../../contexts/user.context'
 
 
 const Header = ()=>{
   const navigate = useNavigate()
+
+  const {isAuthenticated} = useContext(UserContext)
 
   const handleLoginClick = (page:string)=>{
     navigate(page)
@@ -22,15 +26,14 @@ const Header = ()=>{
         <HeaderItem>
           Explorar
         </HeaderItem>
-        <HeaderItem onClick={()=>handleLoginClick('/login')}>
-         Login
-        </HeaderItem>
-        <HeaderItem onClick={()=>handleLoginClick('/singup')}>
-          Criar Conta
-        </HeaderItem>
-        <HeaderItem onClick={()=> signOut(auth)}>
-          Sair
-        </HeaderItem>
+        {!isAuthenticated ? (
+          <>
+            <HeaderItem onClick={()=>handleLoginClick('/login')}>Login</HeaderItem>
+            <HeaderItem onClick={()=>handleLoginClick('/singup')}>Criar Conta</HeaderItem>
+          </>
+        )
+        :(<HeaderItem onClick={()=> signOut(auth)}>Sair</HeaderItem>)
+      }
         <HeaderItem>
           <BsCart3 size={25}/>
           <p>5</p>
