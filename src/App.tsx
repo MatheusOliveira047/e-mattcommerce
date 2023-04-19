@@ -1,4 +1,4 @@
-import {BrowserRouter,Routes,Route} from 'react-router-dom'
+import {BrowserRouter,Routes,Route,Navigate} from 'react-router-dom'
 import Home from './pages/Home';
 import LoginPage from './pages/Login';
 import Header from './components/Header';
@@ -12,6 +12,8 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 
 
 const App: FunctionComponent  = ()=>{
+
+
   const {currentUser,loginUser,isAuthenticated,logoutUser} = useContext(UserContext)
 
 
@@ -35,8 +37,8 @@ const App: FunctionComponent  = ()=>{
       <Header/>
       <Routes>
         <Route path='/' element={<Home/>} />
-        <Route path='/login' element={<LoginPage/>} />
-        <Route path='/singup' element={<SingUpPage/>} />
+        <Route path='/login' element={!isAuthenticated ? <LoginPage/> : <Navigate to={'/'}/> } />
+        <Route path='/singup' element={!isAuthenticated ? <SingUpPage/> : <Navigate to={'/'}/>} />
 
 
       </Routes>
