@@ -31,7 +31,8 @@ const SingUpPage = ()=>{
       id: usersCredentials.user.uid,
       email:usersCredentials.user.email,
       firstName:data.firstName,
-      lastName: data.lastName
+      lastName: data.lastName,
+      provider: 'firebase'
      })
     } catch (error) {
       console.log({error})
