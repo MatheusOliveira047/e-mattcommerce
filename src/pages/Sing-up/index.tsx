@@ -1,15 +1,15 @@
+import { addDoc, collection } from 'firebase/firestore'
+import { auth, db } from '../../config/firebase.config'
+import { AuthError, createUserWithEmailAndPassword, AuthErrorCodes } from 'firebase/auth'
+import isEmail from 'validator/lib/isEmail'
 import { FiLogIn } from 'react-icons/fi'
 import {useForm} from 'react-hook-form'
 
 import CustomButton from '../../components/Custom-Button'
 import CustomInput from '../../components/Custom-Input'
-import {SignUpContainer,SignUpContent,SignUpHeadline,SignUpInputContainer} from './sing-up.styled'
 import InputErrorMessage from '../../components/input-error-message'
-import isEmail from 'validator/lib/isEmail'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { auth, db } from '../../config/firebase.config'
-import { addDoc, collection } from 'firebase/firestore'
 
+import {SignUpContainer,SignUpContent,SignUpHeadline,SignUpInputContainer} from './sing-up.styled'
 interface SingUpForm {
   firstName:string
   lastName:string
@@ -19,7 +19,7 @@ interface SingUpForm {
 }
 
 const SingUpPage = ()=>{
-  const {register,formState:{errors},handleSubmit, watch} = useForm<SingUpForm>()
+  const {register,formState:{errors},handleSubmit, watch, setError} = useForm<SingUpForm>()
 
   const watchPassword = watch('password')
 
@@ -35,6 +35,12 @@ const SingUpPage = ()=>{
      })
     } catch (error) {
       console.log({error})
+      const _error = error as AuthError
+
+      if(_error.code === AuthErrorCodes.EMAIL_EXISTS){
+        return setError('email', {type:'alreadyInUse'})
+      }
+      
     }
   }
 
@@ -83,6 +89,9 @@ const SingUpPage = ()=>{
             )}
             {errors?.email?.type === 'validate' && (
               <InputErrorMessage>Por favor, insira um e-mail válido</InputErrorMessage>
+            )}
+            {errors.email?.type === 'alreadyInUse' && (
+              <InputErrorMessage>este email já existe, por favor use outro email.</InputErrorMessage>
             )}
           </SignUpInputContainer>
 
