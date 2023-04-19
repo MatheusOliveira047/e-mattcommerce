@@ -4,9 +4,14 @@ import LoginPage from './pages/Login';
 import Header from './components/Header';
 import './App.css'
 import SingUpPage from './pages/Sing-up';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './config/firebase.config';
 
 
 const App  = ()=>{
+  onAuthStateChanged(auth,(user)=>{
+    console.log(user)
+  })
   return (
     <BrowserRouter>
       <Header/>

@@ -2,6 +2,8 @@ import {BsCart3} from 'react-icons/bs'
 import {Header_Container,HeaderItem,HeaderItems,HeaderTitle} from './header.styles'
 
 import { useNavigate } from 'react-router-dom'
+import { signOut } from 'firebase/auth'
+import { auth } from '../../config/firebase.config'
 
 
 const Header = ()=>{
@@ -25,6 +27,9 @@ const Header = ()=>{
         </HeaderItem>
         <HeaderItem onClick={()=>handleLoginClick('/singup')}>
           Criar Conta
+        </HeaderItem>
+        <HeaderItem onClick={()=> signOut(auth)}>
+          Sair
         </HeaderItem>
         <HeaderItem>
           <BsCart3 size={25}/>
