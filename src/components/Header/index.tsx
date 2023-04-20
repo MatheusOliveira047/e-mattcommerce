@@ -23,7 +23,7 @@ const Header = ()=>{
       <HeaderTitle onClick={()=>handleLoginClick('/')}>E-MattClothing</HeaderTitle>
 
       <HeaderItems>
-        <HeaderItem>
+        <HeaderItem onClick={()=> handleLoginClick('/explore')}>
           Explorar
         </HeaderItem>
         {!isAuthenticated ? (
