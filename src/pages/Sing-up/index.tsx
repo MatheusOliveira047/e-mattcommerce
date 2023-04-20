@@ -8,8 +8,10 @@ import {useForm} from 'react-hook-form'
 import CustomButton from '../../components/Custom-Button'
 import CustomInput from '../../components/Custom-Input'
 import InputErrorMessage from '../../components/input-error-message'
+import {useState} from 'react'
 
 import {SignUpContainer,SignUpContent,SignUpHeadline,SignUpInputContainer} from './sing-up.styled'
+import Loading from '../../components/Loading'
 interface SingUpForm {
   firstName:string
   lastName:string
@@ -19,11 +21,13 @@ interface SingUpForm {
 }
 
 const SingUpPage = ()=>{
+  const [isLoading,setIsLoading] = useState(false)
   const {register,formState:{errors},handleSubmit, watch, setError} = useForm<SingUpForm>()
 
   const watchPassword = watch('password')
 
   const handleSubmitPress =  async (data:SingUpForm)=>{
+    setIsLoading(true)
     try {
      const usersCredentials = await createUserWithEmailAndPassword(auth, data.email, data.password)
 
@@ -42,11 +46,14 @@ const SingUpPage = ()=>{
         return setError('email', {type:'alreadyInUse'})
       }
       
+    }finally{
+      setIsLoading(false)
     }
   }
 
   return(
   <>
+      {isLoading && <Loading/>}
       <SignUpContainer>
         <SignUpContent>
           <SignUpHeadline>Crie sua conta</SignUpHeadline>

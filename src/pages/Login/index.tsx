@@ -17,6 +17,8 @@ import InputErrorMessage from '../../components/input-error-message'
 import { AuthError, AuthErrorCodes, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
 import { auth, db, googleProvider } from '../../config/firebase.config'
 import { addDoc, collection, getDocs, query, where } from 'firebase/firestore'
+import { useState } from 'react'
+import Loading from '../../components/Loading'
 
 interface LoginForm {
   email:string
@@ -24,9 +26,12 @@ interface LoginForm {
 }
 
 const LoginPage = ()=>{
+  const [isLoading,setIsLoading] = useState(false)
+
   const {register, formState: {errors}, handleSubmit, setError} = useForm<LoginForm>()
 
   const handleSubmitPress = async(data:LoginForm)=>{
+    setIsLoading(true)
     try {
      const userCredential =  await signInWithEmailAndPassword(auth,data.email,data.password)
 
@@ -40,10 +45,13 @@ const LoginPage = ()=>{
       if(_error.code === AuthErrorCodes.USER_DELETED){
         return setError('email', {type:'not-user'})
       }
+    }finally{
+      setIsLoading(false)
     }
   }
 
   const handleSignWithGooglePress = async()=>{
+    setIsLoading(true)
     try {
       const userCredentials = await signInWithPopup(auth, googleProvider)
 
@@ -65,12 +73,15 @@ const LoginPage = ()=>{
       }
     } catch (error) {
       console.log(error)
+    }finally{
+      setIsLoading(false)
     }
   }
 
 
   return(
     <>
+    {isLoading && (<Loading/>)}
     <LoginContainer>
       <LoginContent>
         <LoginHeadline> Entre com a sua conta </LoginHeadline>
