@@ -8,4 +8,7 @@ interface Category {
   products: Product[]
 }
 
+
+
+
 export default Category
