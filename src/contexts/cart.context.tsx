@@ -5,6 +5,7 @@ import Product from '../types/product.types'
 interface ICartContext {
   isVisible: boolean
   productsPrice: number
+  productsCount:number
   products: CartProduct[]
   toggleCart: ()=> void
   addProductToCart: (product: Product) => void
@@ -25,7 +26,8 @@ export const CartContext = createContext<ICartContext>({
   removeProductFromCart: ()=>{},
   increaseProductQuantity: ()=>{},
   subtractProductQuantity:()=>{},
-  productsPrice:0
+  productsPrice:0,
+  productsCount:0
 })
 
 const CartContextProvider: FunctionComponent<ICartContextProps> = ({children})=>{
@@ -35,6 +37,12 @@ const CartContextProvider: FunctionComponent<ICartContextProps> = ({children})=>
   const productsPrice = useMemo(()=>{
     return products.reduce((acc, currentProduct)=>{
       return acc + (currentProduct.price * currentProduct.quantity)
+    },0)
+  }, [products])
+
+  const productsCount = useMemo(()=>{
+    return products.reduce((acc, currentProduct)=>{
+      return acc + currentProduct.quantity
     },0)
   }, [products])
 
@@ -66,7 +74,7 @@ const CartContextProvider: FunctionComponent<ICartContextProps> = ({children})=>
   
 
   return(
-    <CartContext.Provider value={{productsPrice,isVisible,products,toggleCart,addProductToCart,removeProductFromCart,increaseProductQuantity,subtractProductQuantity}}>
+    <CartContext.Provider value={{productsCount,productsPrice,isVisible,products,toggleCart,addProductToCart,removeProductFromCart,increaseProductQuantity,subtractProductQuantity}}>
       {children}
     </CartContext.Provider>
   )
