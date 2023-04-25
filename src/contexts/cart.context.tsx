@@ -8,6 +8,8 @@ interface ICartContext {
   toggleCart: ()=> void
   addProductToCart: (product: Product) => void
   removeProductFromCart: (productId:string) =>void
+  increaseProductQuantity: (productId:string) =>void
+  subtractProductQuantity: (productId:string) => void
 }
 
 interface ICartContextProps {
@@ -19,7 +21,9 @@ export const CartContext = createContext<ICartContext>({
   products:[],
   toggleCart: ()=>{},
   addProductToCart: ()=> {},
-  removeProductFromCart: ()=>{}
+  removeProductFromCart: ()=>{},
+  increaseProductQuantity: ()=>{},
+  subtractProductQuantity:()=>{}
 })
 
 const CartContextProvider: FunctionComponent<ICartContextProps> = ({children})=>{
@@ -32,20 +36,29 @@ const CartContextProvider: FunctionComponent<ICartContextProps> = ({children})=>
 
   const addProductToCart = (product: Product)=>{
     const productIsAlreadyInCart = products.some((item)=> item.id === product.id)
-
     if(productIsAlreadyInCart){
      return setProducts(products => products.map(item=> item.id === product.id ? {...item, quantity: item.quantity + 1}: item))
     }
-
     setProducts(prevState => [...prevState, {...product, quantity:1}])
   }
+
 
   const removeProductFromCart = (productId:string)=>{
     setProducts(products => products.filter(product=> product.id !== productId))
   }
 
+  const increaseProductQuantity = (productId:string)=>{
+    setProducts(products=> products.map(product=> product.id === productId ? {...product,quantity: product.quantity + 1} : product))
+  }
+
+  const subtractProductQuantity = (productId:string)=>{
+    
+    setProducts(products=> products.map(product=> product.id === productId ? {...product,quantity: product.quantity - 1} : product).filter(product => product.quantity > 0))
+
+  }
+
   return(
-    <CartContext.Provider value={{isVisible,products,toggleCart,addProductToCart,removeProductFromCart}}>
+    <CartContext.Provider value={{isVisible,products,toggleCart,addProductToCart,removeProductFromCart,increaseProductQuantity,subtractProductQuantity}}>
       {children}
     </CartContext.Provider>
   )
