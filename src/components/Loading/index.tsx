@@ -2,10 +2,15 @@ import {FunctionComponent} from 'react'
 import {LoadingContainer} from './loading.styled'
 import { FadeLoader } from 'react-spinners'
 
-const Loading: FunctionComponent = ()=>{
+interface LoadingProps {
+  message?:string
+}
+
+const Loading: FunctionComponent<LoadingProps> = ({message})=>{
   return(
     <LoadingContainer>
       <FadeLoader color='#212529'/>
+      {message && <p>{message}</p>}
     </LoadingContainer>
   )
 }
