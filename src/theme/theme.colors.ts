@@ -12,7 +12,8 @@ const Colors =  {
     background:"#E9ECEF",
     placeholder: "#6C757D"
   },
-  error: "#FF6A6A"
+  error: "#FF6A6A",
+  sucess: "#198754"
 
 }
 

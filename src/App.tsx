@@ -16,6 +16,7 @@ import CategoryDetailsPage from './pages/Category-Details';
 import Cart from './components/cart';
 import ChekoutPage from './pages/Checkout';
 import AuthenticationGuard from './guards/authenticaion.guard';
+import PaymentConfirmationPage from './pages/Payment-confirmation';
 
 
 const App: FunctionComponent  = ()=>{
@@ -54,7 +55,10 @@ const App: FunctionComponent  = ()=>{
         <Route path='/' element={<Home/>} />
         <Route path='/explore' element={<ExplorePage/>} />
         <Route path='/category/:id' element={<CategoryDetailsPage/>} />
+        <Route path='/payment-confirmation' element={<PaymentConfirmationPage/>}/>
         <Route path='/chekout' element={<AuthenticationGuard><ChekoutPage /></AuthenticationGuard>}/>
+
+
         <Route path='/login' element={!isAuthenticated ? <LoginPage/> : <Navigate to={'/'}/> } />
         <Route path='/singup' element={!isAuthenticated ? <SingUpPage/> : <Navigate to={'/'}/>} />
       </Routes>
