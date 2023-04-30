@@ -1,31 +1,38 @@
+import { useDispatch } from 'react-redux';
 import {BrowserRouter,Routes,Route,Navigate} from 'react-router-dom'
-import Home from './pages/Home';
-import LoginPage from './pages/Login';
-import Header from './components/Header';
-import './App.css'
-import SingUpPage from './pages/Sing-up';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth, db } from './config/firebase.config';
 import { FunctionComponent, useEffect, useState } from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
+
+import { auth, db } from './config/firebase.config';
 import { userConverter } from './converters/firestore.converters';
+import { loginUser, logoutUser } from './store/reducers/user/user.actions';
+import { useAppSelector } from './hooks/redux,hooks';
+
+//components
+import Header from './components/Header';
 import Loading from './components/Loading';
+import Cart from './components/cart';
+import AuthenticationGuard from './guards/authenticaion.guard';
+
+// pages
+import SingUpPage from './pages/Sing-up';
+import LoginPage from './pages/Login';
 import ExplorePage from './pages/Explore/index.page';
 import CategoryDetailsPage from './pages/Category-Details';
-import Cart from './components/cart';
 import ChekoutPage from './pages/Checkout';
-import AuthenticationGuard from './guards/authenticaion.guard';
+import Home from './pages/Home';
 import PaymentConfirmationPage from './pages/Payment-confirmation';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginUser, logoutUser } from './store/reducers/user/user.actions';
 
+//styles
+import './App.css'
 
 const App: FunctionComponent  = ()=>{
   const [isInitializing,setIsInitializing] = useState(true)
 
   const dispatch = useDispatch()
 
-  const {isAuthenticated} = useSelector((rootReducer:any)=> rootReducer.userReducer)
+  const {isAuthenticated} = useAppSelector((rootReducer)=> rootReducer.userReducer)
 
   useEffect(()=>{
     onAuthStateChanged(auth, async (user)=>{
