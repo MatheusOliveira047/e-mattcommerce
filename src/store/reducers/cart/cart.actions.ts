@@ -36,7 +36,6 @@ export const subtractProductQuantity = (payload:string)=>({
     payload
 })
 
-
 export const clearProducts = ()=>({
     type: CartActionsTypes.CLEAR_PRODUCTS
 })
