@@ -22,13 +22,13 @@ interface ICartContextProps {
 export const CartContext = createContext<ICartContext>({
   isVisible: false,
   products:[],
+  productsPrice:0,
+  productsCount:0,
   toggleCart: ()=>{},
   addProductToCart: ()=> {},
   removeProductFromCart: ()=>{},
   increaseProductQuantity: ()=>{},
   subtractProductQuantity:()=>{},
-  productsPrice:0,
-  productsCount:0,
   clearProducts:()=> {}
 })
 

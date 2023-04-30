@@ -6,14 +6,25 @@ import CustomButton from '../Custom-Button'
 import { CartContext } from '../../contexts/cart.context'
 import CartItem from '../cart-item'
 import { useNavigate } from 'react-router-dom'
+import { useAppSelector } from '../../hooks/redux,hooks'
+import { useDispatch } from 'react-redux'
+import { cartToggle } from '../../store/reducers/cart/cart.actions'
 
 const Cart: FunctionComponent = ()=>{
-  const {isVisible, toggleCart, products,productsPrice,productsCount} = useContext(CartContext)
+  const {productsPrice,productsCount} = useContext(CartContext)
+
+  const {isVisible,products} = useAppSelector((rootReducer) => rootReducer.cartReducer)
 
   const navigate = useNavigate()
 
+  const dispatch = useDispatch()
+
+  const toggleCart = ()=>{
+    dispatch(cartToggle())
+  }
+
   const handleChekout = ()=>{
-    toggleCart()
+    dispatch(cartToggle())
     navigate('/chekout')
   }
 
