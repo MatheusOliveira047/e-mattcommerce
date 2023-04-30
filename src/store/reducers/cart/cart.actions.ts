@@ -21,5 +21,10 @@ export const addProductToCart = (payload: Product)=>({
     payload
 })
 
+export const removeProductFromCart = (payload: string)=>({
+    type:CartActionsTypes.REMOVE_PRODUCT_FROM_CART,
+    payload
+})
+
 
 export type UserActions = ToggleCartAction

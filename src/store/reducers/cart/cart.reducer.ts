@@ -3,16 +3,12 @@ import CartActionsTypes from './cart.action-types'
 
 interface InitialState {
   isVisible: boolean
-  productsPriceTotal:number
-  productsCount:number
   products: CartProduct[]
 }
 
 const initialState: InitialState = {
   isVisible: false,
   products: [],
-  productsCount: 0,
-  productsPriceTotal: 0
 }
 
 const cartReducer = (state = initialState, action:any) => {
@@ -33,9 +29,13 @@ const cartReducer = (state = initialState, action:any) => {
       return {
         ...state,
         products: [...state.products, {...product, quantity:1}]
-      
       }
     }
+    case CartActionsTypes.REMOVE_PRODUCT_FROM_CART:
+      return {
+        ...state,
+        products: state.products.filter(product => product.id !== action.payload.id)
+      }
     default: 
       return {
         ...state
