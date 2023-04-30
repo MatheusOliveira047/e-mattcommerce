@@ -26,5 +26,20 @@ export const removeProductFromCart = (payload: string)=>({
     payload
 })
 
+export const increaseProductQuantity = (payload:string)=>({
+    type:CartActionsTypes.INCREASE_PRODUCT_QUANTITY,
+    payload
+})
+
+export const subtractProductQuantity = (payload:string)=>({
+    type:CartActionsTypes.SUBTRACT_PRODUCT_QUANTITY,
+    payload
+})
+
+
+export const clearProducts = ()=>({
+    type: CartActionsTypes.CLEAR_PRODUCTS
+})
+
 
 export type UserActions = ToggleCartAction
