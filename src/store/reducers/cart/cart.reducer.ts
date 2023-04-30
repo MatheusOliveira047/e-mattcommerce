@@ -12,7 +12,7 @@ const initialState: InitialState = {
   products: [],
 }
 
-const cartReducer = (state = initialState, action:CartActions) => {
+const cartReducer = (state = initialState, action:CartActions):InitialState => {
   switch (action.type){
     case CartActionsTypes.TOGGLE_CART:
       return {...state, isVisible: !state.isVisible}
