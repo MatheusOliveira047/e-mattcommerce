@@ -19,6 +19,7 @@ import { auth, db, googleProvider } from '../../config/firebase.config'
 import { addDoc, collection, getDocs, query, where } from 'firebase/firestore'
 import { useState } from 'react'
 import Loading from '../../components/Loading'
+import { useNavigate } from 'react-router-dom'
 
 interface LoginForm {
   email:string
@@ -28,13 +29,15 @@ interface LoginForm {
 const LoginPage = ()=>{
   const [isLoading,setIsLoading] = useState(false)
 
+  const navigate = useNavigate()
+
   const {register, formState: {errors}, handleSubmit, setError} = useForm<LoginForm>()
 
   const handleSubmitPress = async(data:LoginForm)=>{
     setIsLoading(true)
     try {
      const userCredential =  await signInWithEmailAndPassword(auth,data.email,data.password)
-
+      navigate('/')
      console.log(userCredential)
     } catch (error) {
       const _error = error as AuthError
@@ -71,6 +74,8 @@ const LoginPage = ()=>{
           provider: 'google'
         })
       }
+      navigate('/')
+
     } catch (error) {
       console.log(error)
     }finally{
