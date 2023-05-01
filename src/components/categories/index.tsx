@@ -5,12 +5,16 @@ import CategoryItem from '../category-item'
 import { CategoryContext } from '../../contexts/category.context'
 import Loading from '../Loading'
 import {CategoriesContainer,CategoriesContent} from './categories.styled'
+import { useDispatch } from 'react-redux'
+import { fectchCategories } from '../../store/reducers/category/category.actions'
 
 const Categories = ()=>{
-  const {fetchCategories, categories,isLoading} = useContext(CategoryContext)
+  const {categories,isLoading} = useContext(CategoryContext)
+
+  const dispatch = useDispatch()
 
   useEffect(()=>{
-    fetchCategories()
+    dispatch(fectchCategories() as any)
   },[])
 
   return(
