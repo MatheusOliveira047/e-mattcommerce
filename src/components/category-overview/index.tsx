@@ -1,17 +1,19 @@
-import { FunctionComponent, useContext } from 'react'
-import {CategoryContainer,CategoryTitle,ProductsContainer} from './category-overview.styled'
+import { FunctionComponent} from 'react'
+
+import { useAppSelector } from '../../hooks/redux,hooks'
 import Category from '../../types/category.types'
+
 import ProductItem from '../product-item'
-import { UserContext } from '../../contexts/user.context'
-import { CategoryContext } from '../../contexts/category.context'
 import Loading from '../Loading'
+
+import {CategoryContainer,CategoryTitle,ProductsContainer} from './category-overview.styled'
 
 interface CategoryOverviewProps {
   category: Category
 }
 
 const CategoryOverview: FunctionComponent<CategoryOverviewProps> = ({category})=>{
- const {isLoading} = useContext(CategoryContext)
+ const {isLoading} = useAppSelector((rootReducer)=> rootReducer.categoryReducer)
 
   return (
     <>

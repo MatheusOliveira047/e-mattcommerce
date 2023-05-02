@@ -3,10 +3,11 @@ import { db } from '../../../config/firebase.config'
 import { collection, getDocs } from 'firebase/firestore'
 import { categoryConverter } from '../../../converters/firestore.converters'
 import Category from '../../../types/category.types'
+import CategoryActionsTypes from './category.actions.types'
 
 export const fectchCategories = ()=>{
   return async (dispatch: Dispatch)=>{
-    dispatch({type: 'categories/fetchStart'})
+    dispatch({type: CategoryActionsTypes.FETCH_CATEGORIES_START})
 
     try {
       const categoriesFromFirestore: Category[] = []
@@ -17,12 +18,12 @@ export const fectchCategories = ()=>{
       })
 
       dispatch({
-        type: 'categories/fetchSuccess',
+        type: CategoryActionsTypes.FETCH_CATEGORIES_SUCCESS,
         payload: categoriesFromFirestore
       })
 
     } catch (error) {
-      dispatch({type:'categories/fetchFailure'})
+      dispatch({type:CategoryActionsTypes.FETCH_CATEGORIES_FAILURE})
     }
   }
 }
