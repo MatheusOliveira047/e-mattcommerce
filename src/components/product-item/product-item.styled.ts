@@ -7,6 +7,7 @@ interface ProductImageProps {
 export const ProductContainer = styled.div`
   display: flex;
   flex-direction: column;
+  
 `
 
 export const ProductInfo = styled.div`
