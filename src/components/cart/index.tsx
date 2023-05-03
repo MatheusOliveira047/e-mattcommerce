@@ -7,7 +7,8 @@ import CustomButton from '../Custom-Button'
 import CartItem from '../cart-item'
 
 import { useAppSelector } from '../../hooks/redux,hooks'
-import { cartToggle } from '../../store/reducers/cart/cart.actions'
+//import { cartToggle } from '../../store/reducers/cart/cart.actions'
+import { toggle } from '../../store/toolkit/cart/cart.slice'
 import { selectProductsCount, selectProductsTotalPrice } from '../../store/reducers/cart/cart.selectors'
 
 import {CartContainer,CartContent,CartEscapeArea,CartTitle,CartTotal} from './cart.styled'
@@ -24,11 +25,11 @@ const Cart: FunctionComponent = ()=>{
   const dispatch = useDispatch()
 
   const toggleCart = ()=>{
-    dispatch(cartToggle())
+    dispatch(toggle())
   }
 
   const handleChekout = ()=>{
-    dispatch(cartToggle())
+    dispatch(toggle())
     navigate('/chekout')
   }
 

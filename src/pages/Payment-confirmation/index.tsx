@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 
 import CustomButton from '../../components/Custom-Button'
 5
-import { clearProducts } from '../../store/reducers/cart/cart.actions'
+import { clearProducts } from '../../store/toolkit/cart/cart.slice'
 
 import {PaymentConfirmationContainer,PaymentConfirmationContent} from './payment-confirmation.styled'
 import Colors from '../../theme/theme.colors'

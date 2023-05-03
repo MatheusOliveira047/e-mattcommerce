@@ -6,9 +6,9 @@ import { signOut } from 'firebase/auth'
 import { auth } from '../../config/firebase.config'
 import { logoutUser } from '../../store/toolkit/user/user.slice'
 import { useAppSelector } from '../../hooks/redux,hooks'
-import { cartToggle } from '../../store/reducers/cart/cart.actions'
+//import { cartToggle } from '../../store/reducers/cart/cart.actions'
 import { selectProductsCount } from '../../store/reducers/cart/cart.selectors'
-
+import { toggle } from '../../store/toolkit/cart/cart.slice'
 
 import {Header_Container,HeaderItem,HeaderItems,HeaderTitle} from './header.styles'
 
@@ -23,7 +23,7 @@ const Header = ()=>{
 
 
   const toggleCart = ()=>{
-    dispatch(cartToggle())
+    dispatch(toggle())
   }
 
   const handleLoginClick = (page:string)=>{

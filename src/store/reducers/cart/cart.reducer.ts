@@ -16,11 +16,10 @@ const cartReducer = (state = initialState, action:CartActions):InitialState => {
   switch (action.type){
     case CartActionsTypes.TOGGLE_CART:
       return {...state, isVisible: !state.isVisible}
+
     case CartActionsTypes.ADD_PRODUCT_TO_CART:{
       const product = action.payload
-
       const productIsAlreadyInCart = state.products.some((item)=> item.id === product.id)
-
       if(productIsAlreadyInCart){
         return{
           ...state,
@@ -32,21 +31,25 @@ const cartReducer = (state = initialState, action:CartActions):InitialState => {
         products: [...state.products, {...product, quantity:1}]
       }
     }
+
     case CartActionsTypes.REMOVE_PRODUCT_FROM_CART:
       return {
         ...state,
         products: state.products.filter(product => product.id !== action.payload)
       }
+
     case CartActionsTypes.INCREASE_PRODUCT_QUANTITY:
       return{
         ...state,
         products: state.products.map(product=> product.id === action.payload ? {...product,quantity: product.quantity + 1} : product)
       }
+
     case CartActionsTypes.SUBTRACT_PRODUCT_QUANTITY:
       return{
         ...state,
         products: state.products.map(product=> product.id === action.payload ? {...product,quantity: product.quantity - 1} : product).filter(product => product.quantity > 0)
       }
+      
     case CartActionsTypes.CLEAR_PRODUCTS:
       return{
         ...state,

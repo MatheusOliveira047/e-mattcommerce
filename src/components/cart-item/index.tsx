@@ -4,7 +4,8 @@ import CartProduct from '../../types/cart.types'
 import {AiOutlinePlus, AiOutlineMinus, AiOutlineClose} from 'react-icons/ai'
 
 import { useDispatch } from 'react-redux'
-import { increaseProductQuantity, removeProductFromCart, subtractProductQuantity } from '../../store/reducers/cart/cart.actions'
+
+import { removeProductFromCart,increaseProductQuantity,subtractProductQuantity } from '../../store/toolkit/cart/cart.slice'
 
 interface CartItemProps {
   product: CartProduct

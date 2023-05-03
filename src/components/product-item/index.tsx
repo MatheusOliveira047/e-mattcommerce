@@ -6,19 +6,18 @@ import {BsCartPlus} from 'react-icons/bs'
 import Product from '../../types/product.types'
 import CustomButton from '../Custom-Button'
 import { useDispatch } from 'react-redux'
-import { addProductToCart } from '../../store/reducers/cart/cart.actions'
-
+//import { addProductToCart } from '../../store/reducers/cart/cart.actions'
+import { add_product_to_cart } from '../../store/toolkit/cart/cart.slice'
 interface ProductItemProps {
   product: Product
 }
 
 const ProductItem: FunctionComponent<ProductItemProps> = ({product})=>{
-  //const {addProductToCart} = useContext(CartContext)
 
   const dispatch = useDispatch()
 
   const handleAddToCartClick = ()=>{
-    dispatch(addProductToCart(product))
+    dispatch(add_product_to_cart(product))
   }
 
   return(
