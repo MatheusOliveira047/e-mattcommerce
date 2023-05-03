@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import Loading from '../Loading'
 import CategoryOverview from '../category-overview'
 
-import { fectchCategories } from '../../store/reducers/category/category.actions'
+import { fetchCategories } from '../../store/toolkit/category/category.slice'
 import { useAppSelector } from '../../hooks/redux,hooks'
 
 import {Container} from './categories-overview.styled'
@@ -18,7 +18,7 @@ const CategoriesOverview: FunctionComponent = ()=>{
 
   useEffect(()=>{
     if(categories.length === 0){
-      dispatch(fectchCategories() as any)
+      dispatch(fetchCategories() as any)
     }
   },[])
 

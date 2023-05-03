@@ -4,7 +4,7 @@ import CategoryItem from '../category-item'
 import Loading from '../Loading'
 import {CategoriesContainer,CategoriesContent} from './categories.styled'
 import { useDispatch } from 'react-redux'
-import { fectchCategories } from '../../store/reducers/category/category.actions'
+import { fetchCategories } from '../../store/toolkit/category/category.slice'
 import { useAppSelector } from '../../hooks/redux,hooks'
 
 const Categories = ()=>{
@@ -14,7 +14,7 @@ const Categories = ()=>{
   const dispatch = useDispatch()
 
   useEffect(()=>{
-    dispatch(fectchCategories() as any)
+    dispatch(fetchCategories() as any)
   },[])
 
   return(
