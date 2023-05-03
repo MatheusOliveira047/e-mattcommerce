@@ -7,7 +7,9 @@ interface ProductImageProps {
 export const ProductContainer = styled.div`
   display: flex;
   flex-direction: column;
-  
+  @media(max-width: 768px){
+    min-width: 100%;
+  }
 `
 
 export const ProductInfo = styled.div`
@@ -35,6 +37,9 @@ export const ProductImage = styled.div<ProductImageProps>`
   transition:all 0.3s ease;
   background-color:transparent;
   background-blend-mode:color;
+  @media(max-width: 768px){
+    width: 100%;
+  }
 
   button {
     visibility:hidden;
